@@ -1,0 +1,97 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
+        <!-- 插件本身不依赖jquery -->
+        <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+        <script src="./build/region-cascade.js"></script>
+    </head>
+    <body>
+        <ul>
+            <li>
+                <h4>基本使用：</h4>
+                <div id="basic"></div>
+            </li>
+            <li>
+                <h4>监听值改变：</h4>
+                <pre>值(行政编码)：<i id="onchange_val"></i></pre>
+                <div id="onchange_div"></div>
+            </li>
+            <li>
+                <h4>获取值：</h4>
+                <pre>值(行政编码)：<i id="get_val"></i></pre>
+                <div id="get_div"></div>
+                <button id="get_button">获取</button>
+            </li>
+            <li>
+                <h4>设置值：</h4>
+                <pre style="display: inline">值(行政编码)：<i id="set_val"></i></pre>
+                <input id="set_text" type="text" value="370684"/>
+                <button id="set_button">设置</button>
+                <div id="set_div"></div>
+            </li>
+            <li>
+                <h4>设置权限：</h4>
+                <pre>权限码(行政编码)：<i id="auth_val">370600</i></pre>
+                <div id="auth_div"></div>
+            </li>
+            <li>
+                <h4>设置权限（严格模式）：</h4>
+                <pre>权限码(行政编码)：<i id="auth_strict_val">370600</i></pre>
+                <div id="auth_strict_div"></div>
+            </li>
+            <li>
+                <h4>动态设置权限：</h4>
+                <pre style="display: inline">权限码(行政编码)：<i></i></pre>
+                <input id="set_auth_text" type="text" value="370684"/>
+                <button id="set_auth_button">设置</button>
+                <div id="set_auth_div"></div>
+            </li>
+        </ul>
+    </body>
+    <script>
+        //基本使用
+        RegionCascade(document.getElementById('basic'));
+        //监听值改变
+        RegionCascade(document.getElementById('onchange_div'),{
+            onChange: function(val){
+                $('#onchange_val').text(val);
+            }
+        });
+        //获取值
+        var getRegion = RegionCascade(document.getElementById('get_div'));
+        $('#get_button').click(function(){
+            var code = getRegion.getValue();
+            $('#get_val').text(code);
+        });
+        //设置值
+        var set_value = $('#set_text').val();
+        var setRegion = RegionCascade(document.getElementById('set_div'),{
+            value: set_value
+        });
+        $('#set_button').click(function(){
+            var code = $('#set_text').val();
+            setRegion.setValue(code);
+        });
+        //设置权限
+        RegionCascade(document.getElementById('auth_div'),{
+            authority: $('#auth_val').text(),
+            value: 370600
+        });
+        //设置权限 严格模式
+        RegionCascade(document.getElementById('auth_strict_div'),{
+            authority: $('#auth_strict_val').text(),
+            value: 370600,
+            strict: true
+        });
+        //动态设置权限
+        var setAuthRegion = RegionCascade(document.getElementById('set_auth_div'),{
+            value: 370684,
+            // strict: true
+        });
+        $('#set_auth_button').click(function(){
+            var auth = $('#set_auth_text').val();
+            setAuthRegion.setAuthority(auth);
+        });
+    </script>
+</html>
