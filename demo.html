@@ -9,43 +9,50 @@
     <body>
         <ul>
             <li>
-                <h4>基本使用：</h4>
+                <h4>基本使用:</h4>
                 <div id="basic"></div>
             </li>
             <li>
-                <h4>监听值改变：</h4>
-                <pre>值(行政编码)：<i id="onchange_val"></i></pre>
+                <h4>监听值改变:</h4>
+                <pre>值(行政编码):<i id="onchange_val"></i></pre>
                 <div id="onchange_div"></div>
             </li>
             <li>
-                <h4>获取值：</h4>
-                <pre>值(行政编码)：<i id="get_val"></i></pre>
+                <h4>获取值:</h4>
+                <pre>值(行政编码):<i id="get_val"></i></pre>
                 <div id="get_div"></div>
                 <button id="get_button">获取</button>
             </li>
             <li>
-                <h4>设置值：</h4>
-                <pre style="display: inline">值(行政编码)：<i id="set_val"></i></pre>
+                <h4>设置值:</h4>
+                <pre style="display: inline">值(行政编码):<i id="set_val"></i></pre>
                 <input id="set_text" type="text" value="370684"/>
                 <button id="set_button">设置</button>
                 <div id="set_div"></div>
             </li>
             <li>
-                <h4>设置权限：</h4>
-                <pre>权限码(行政编码)：<i id="auth_val">370600</i></pre>
+                <h4>设置权限:</h4>
+                <pre>权限码(行政编码):<i id="auth_val">370600</i></pre>
                 <div id="auth_div"></div>
             </li>
             <li>
-                <h4>设置权限（严格模式）：</h4>
-                <pre>权限码(行政编码)：<i id="auth_strict_val">370600</i></pre>
+                <h4>设置权限(严格模式):</h4>
+                <pre>权限码(行政编码):<i id="auth_strict_val">370600</i></pre>
                 <div id="auth_strict_div"></div>
             </li>
             <li>
-                <h4>动态设置权限：</h4>
-                <pre style="display: inline">权限码(行政编码)：<i></i></pre>
+                <h4>动态设置权限:</h4>
+                <pre style="display: inline">权限码(行政编码):<i></i></pre>
                 <input id="set_auth_text" type="text" value="370684"/>
                 <button id="set_auth_button">设置</button>
                 <div id="set_auth_div"></div>
+            </li>
+            <li>
+                <h4>行政编码格式化工具:</h4>
+                <pre style="display: inline">行政编码:<i></i></pre>
+                <input id="format_text" type="text" value="370684"/>
+                <button id="format_button">格式化</button>
+                <pre>值(格式化后):<i id="format_val"></i></pre>
             </li>
         </ul>
     </body>
@@ -92,6 +99,12 @@
         $('#set_auth_button').click(function(){
             var auth = $('#set_auth_text').val();
             setAuthRegion.setAuthority(auth);
+        });
+        //行政编码格式化工具
+        $('#format_button').click(function(){
+            var code = $('#format_text').val();
+            var formatted = RegionCascade.format(code);
+            $('#format_val').text(JSON.stringify(formatted));
         });
     </script>
 </html>
